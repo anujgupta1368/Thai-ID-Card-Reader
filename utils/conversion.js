@@ -1,5 +1,3 @@
-
-// Convert 20 Jul. 2001 to YYYY-MM-DD
 const convertToDate = (dateString) => {
 
     try{

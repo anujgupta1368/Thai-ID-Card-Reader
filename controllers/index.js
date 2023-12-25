@@ -83,10 +83,8 @@ async function handleDeleteRecord(req, res) {
 async function show(req, res) {
     try{
 
-        //  Getting URL Params
         const queryParams = req.query;
 
-        // Query Created using queryParams
         const query = {};
         if(queryParams.dob && queryParams.dob !== '') query.date_of_birth = queryParams.dob;
         if(queryParams.doi && queryParams.doi !== '') query.date_of_issue = queryParams.doi;
@@ -94,10 +92,8 @@ async function show(req, res) {
         if(queryParams.success && queryParams.success === 'on' && queryParams.failure !== 'on') query.status = 'SUCCESS';
         if(queryParams.failure && queryParams.failure === 'on' && queryParams.success !== 'on') query.status = 'FAILURE';
 
-        // Records Find using desire filter query
         const records = await model.find(query);
 
-        // Render again on history
         return res.render('rec', {
             records: records,
             dob: queryParams.dob,
@@ -108,7 +104,6 @@ async function show(req, res) {
 
     }catch (error) {
 
-        // Any wrong queryParams edited by User result in 404
         console.log('error while filtering data', error);
         return res.render('404');
 
@@ -118,10 +113,8 @@ async function show(req, res) {
 async function handleEditRecord(req, res) {
     try {
  
-        // Get the updated info as POST
         const {identificationNumber, name, lastName, dateOfBirth, dateOfIssue, dateOfExpiry} = req.body;
 
-        // Update in DataBase
         const record = await model.findByIdAndUpdate(req.params.recordId,{
                 identificationNumber,
                 name,
@@ -131,12 +124,10 @@ async function handleEditRecord(req, res) {
                 dateOfExpiry,
             });
 
-        // Redirect to Record page
         return res.redirect(`/${req.params.recordId}`);
 
     }catch (error) {
 
-        // Any error redirect to 404
         console.log('error while edit record', error);
         return res.render('404');
     }

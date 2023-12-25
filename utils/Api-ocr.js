@@ -15,13 +15,10 @@ async function getData(imagePath) {
             
             const client = new vision.ImageAnnotatorClient(CONFIG);
 
-        // Read the image file
         const image = await fs.promises.readFile(imagePath);
 
-        // Perform OCR on the image
         const [result] = await client.textDetection(image);
 
-        // Extract relevant information
         const textAnnotations = result.textAnnotations;
 
         if (textAnnotations && textAnnotations.length > 0) {
