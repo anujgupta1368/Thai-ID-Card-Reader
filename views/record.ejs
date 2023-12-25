@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Record page</title>
+</head>
+<body>
+<%- include('./components/nav') %>
+
+<div class="container mt-4">
+    <img src="<%=record.inputImageURL%>" width="400px">
+    <%if(record.status === 'SUCCESS') {%>
+    <pre class="mt-3  text-success">OCR SUCCESS</pre>
+    <pre class="mt-3">
+            {
+                identification_number: <%=record.identificationNumber%>,
+                name: <%=record.ame%>,
+                last_name: <%=record.lastName%>,
+                date_of_birth: <%=record.dateOfBirth%>,
+                date_of_issue: <%=record.dateOfIssue%>,
+                date_of_expiry: <%=record.dateOfExpiry%>
+            }
+        </pre>
+    <% }else {%>
+    <pre class="mt-3 text-danger">OCR FAILED</pre>
+    <pre class="mt-3">
+            {
+                identification_number: <%=record.identificationNumber%>,
+                name: <%=record.name%>,
+                last_name: <%=record.lastName%>,
+                date_of_birth: <%=record.dateOfBirth%>,
+                date_of_issue: <%=record.dateOfIssue%>,
+                date_of_expiry: <%=record.dateOfExpiry%>
+            }
+<!--
+            Record Added   on: <%= record.createdAt.toString().substring(4, 15)%>
+            Record Updated on: <%= record.updatedAt.toString().substring(4, 15);%>-->
+
+        </pre>
+    <% } %>
+    <a href="/edit/<%=record._id%>" class="btn btn-primary" role="button">Edit</a>
+
+</div>
+
+</body>
+</html>

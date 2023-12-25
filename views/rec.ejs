@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Records</title>
+</head>
+<body>
+
+<%- include('./components/nav') %>
+
+<div class="container mt-3">
+    <div class="row row-cols-4">
+        <% records.forEach(record => { %>
+            <div class="col mb-4">
+                <div class="card col" style="width: 18rem">
+                    <img src="<%= record.inputImageUrl %>" class="card-img-top fixed-size-image" width="100%" height="100%"/>
+                    <div class="card-body">
+                        <%if(record.status === 'Valid') {%>
+                            <h5 class="card-title text-success"><%= record.status %></h5>
+                        <%}else {%>
+                            <h5 class="card-title text-danger"><%= record.status %></h5>
+                        <%}%>
+                        <a href="/<%= record._id %>" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+
+
+</body>
+</html>
